@@ -1,8 +1,8 @@
 package main
 
-import "github.com/makki0205/GAE-template/router"
+import "github.com/HAL-RO-Developer/alohomora/router"
 
 func main() {
 	r := router.GetRouter()
-	r.Run(":8000")
+	r.Run(":3000")
 }
