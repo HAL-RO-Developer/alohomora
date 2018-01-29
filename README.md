@@ -8,6 +8,8 @@ goでweb開発をするためのオレなりのtemplate
 - sql-migrate
 - golem
 
+## サーバー仕様
+`仕様`
 
 ## 初期設定
 ```sh
