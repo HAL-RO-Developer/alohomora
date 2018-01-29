@@ -12,5 +12,6 @@ func apiRouter(api *gin.RouterGroup) {
 	//	})
 	//})
 
-	api.GET("/hoge", controller.hoge)
+	api.POST("/user", controller.CreateUser)
+	api.POST("/login", controller.Login)
 }

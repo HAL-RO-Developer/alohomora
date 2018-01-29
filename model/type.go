@@ -13,7 +13,19 @@ type Model struct {
 
 type User struct {
 	Model
-	Email    string
-	Password string
-	Name     string
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"-"`
+}
+type Key struct {
+	Model
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Alive       bool   `json:"alive"`
+}
+
+type Token struct {
+	Model
+	UserID uint   `json:"user_id"`
+	Body   string `json:"body"`
 }
