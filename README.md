@@ -9,7 +9,7 @@ goでweb開発をするためのオレなりのtemplate
 - golem
 
 ## サーバー仕様
-`https://www.getpostman.com/collections/646cbeabe5b89f333beb`
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/646cbeabe5b89f333beb)
 
 ## 初期設定
 ```sh
