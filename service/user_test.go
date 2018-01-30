@@ -7,6 +7,6 @@ import (
 
 func TestUser_Login(t *testing.T) {
 
-	ok := User.Login("llxo2_5oxll@icloud.com3", "hoge")
+	ok, _ := User.Login("llxo2_5oxll@icloud.com3", "hoge")
 	fmt.Println(ok)
 }
