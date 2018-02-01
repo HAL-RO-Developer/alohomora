@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
 import Index from './components/index/index.vue'
 import Product from './components/product/product.vue'
 import NotFound from './components/notFound/notFound.vue'
@@ -7,6 +9,7 @@ import NotFound from './components/notFound/notFound.vue'
 Vue.component('index', Index)
 
 Vue.use(VueRouter)
+Vue.use(Buefy)
 
 const routes = [
     { path: "/", component: Index },
