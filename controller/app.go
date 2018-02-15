@@ -43,8 +43,9 @@ func Open(c *gin.Context) {
 		return
 	}
 	go websocket.SendAll("open!")
-
 	API("1")
+	c.JSON(200, "ok")
+
 }
 func Close(c *gin.Context) {
 	uid := c.Query("uuid")
@@ -54,6 +55,7 @@ func Close(c *gin.Context) {
 	}
 	go websocket.SendAll("close!")
 	API("1")
+	c.JSON(200, "ok")
 }
 
 func SetDevice(c *gin.Context) {

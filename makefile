@@ -8,15 +8,11 @@ run:
 	env lavender=production go run main.go
 
 docker/build:
-	make -f .circleci/ci.mk go/build
-	make -f .circleci/ci.mk docker/build
+	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/main main.go
+	docker build -t makki0205/alohomora .
 
 docker/run:
-	docker run -it --rm 241556795328.dkr.ecr.ap-northeast-1.amazonaws.com/lavender
+	docker run -it --rm makki0205/alohomora
 
 docker/push:
-	env NODE_ENV=production npm run build
-	make -f .circleci/ci.mk go/build
-	make -f .circleci/ci.mk docker/build
-	make -f .circleci/ci.mk login
-	make -f .circleci/ci.mk docker/push
+	docker push makki0205/alohomora
