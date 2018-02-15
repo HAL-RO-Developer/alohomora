@@ -34,6 +34,7 @@
     crossorigin="anonymous"></script>
     <script src="/js/gShake.js"></script>
     <script>
+      let current = false
       let isClose = true
 
       $(document).on("ajaxError", (e, xhr) => {
@@ -43,6 +44,7 @@
       })
 
       const alohomora = () => {
+        current = !current
         $.ajax({
           url: `/api/${isClose ? "open" : "close"}?uuid=${location.pathname.slice(2)}`,
           type: "POST"
@@ -53,9 +55,14 @@
         })
       }
 
-      window.alohomora = alohomora
-
-      $(this).gShake(alohomora)
+      $(this).gShake(() => {
+        if(!current) {
+          alohomora()
+          setTimeout(() => {
+            current = !current
+          }, 5000)
+        }
+      })
     </script>
 </body>
 </html>
