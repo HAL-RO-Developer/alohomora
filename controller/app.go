@@ -22,7 +22,7 @@ func SetToken(c *gin.Context) {
 func App(c *gin.Context) {
 	uuid := c.Param("uid")
 	if uid != uuid {
-		c.Redirect(400, "https://konojunya.com")
+		c.Redirect(301, "https://konojunya.com")
 		return
 	}
 	c.HTML(200, "index.html", nil)
