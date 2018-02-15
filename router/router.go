@@ -1,6 +1,9 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/HAL-RO-Developer/alohomora/controller"
+	"github.com/gin-gonic/gin"
+)
 
 func GetRouter() *gin.Engine {
 	r := gin.Default()
@@ -9,11 +12,11 @@ func GetRouter() *gin.Engine {
 	r.Static("/css", "./public/css")
 
 	r.LoadHTMLGlob("view/*")
+
+	r.GET("/@:uid", controller.App)
+
 	r.GET("/admin", func(c *gin.Context) {
 		c.HTML(200, "admin.html", nil)
-	})
-	r.NoRoute(func(c *gin.Context) {
-		c.HTML(200, "index.html", nil)
 	})
 	api := r.Group("/api")
 	apiRouter(api)

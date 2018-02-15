@@ -18,3 +18,12 @@ func SetToken(c *gin.Context) {
 		"uuid": uid,
 	})
 }
+
+func App(c *gin.Context) {
+	uuid := c.Param("uid")
+	if uid != uuid {
+		c.Redirect(400, "https://konojunya.com")
+		return
+	}
+	c.HTML(200, "index.html", nil)
+}
