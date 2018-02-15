@@ -36,18 +36,26 @@
     <script>
       let isClose = true
 
-      const alofomora = () => {
+      $(document).on("ajaxError", (e, xhr) => {
+        if(xhr.status === 401 || xhr.status === 403) {
+          location.reload()
+        }
+      })
+
+      const alohomora = () => {
         $.ajax({
           url: `/api/${isClose ? "open" : "close"}?uuid=${location.pathname.slice(2)}`,
           type: "POST"
         })
-        .fail(location.reload)
+        .then(() => {
+          isClose = !isClose
+          $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
+        })
       }
 
-      $(this).gShake(() => {
-        isClose = !isClose
-        $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
-      })
+      window.alohomora = alohomora
+
+      $(this).gShake(alohomora)
     </script>
 </body>
 </html>
