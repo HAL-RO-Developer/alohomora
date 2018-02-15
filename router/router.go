@@ -18,9 +18,6 @@ func GetRouter() *gin.Engine {
 	r.GET("/admin", func(c *gin.Context) {
 		c.HTML(200, "admin.html", nil)
 	})
-	r.NoRoute(func(c *gin.Context) {
-		c.HTML(200, "index.html", nil)
-	})
 	api := r.Group("/api")
 	apiRouter(api)
 	return r
