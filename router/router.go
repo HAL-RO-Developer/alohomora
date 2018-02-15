@@ -9,6 +9,9 @@ func GetRouter() *gin.Engine {
 	r.Static("/css", "./public/css")
 
 	r.LoadHTMLGlob("view/*")
+	r.GET("/admin", func(c *gin.Context) {
+		c.HTML(200, "admin.html", nil)
+	})
 	r.NoRoute(func(c *gin.Context) {
 		c.HTML(200, "index.html", nil)
 	})
