@@ -19,7 +19,7 @@
      .wrapper {
        width: 100vw;
        height: 85vh;
-       background-image: url("/image/true.png");
+       background-image: url("/image/false.png");
        background-repeat: no-repeat;
        background-position: center center;
        background-size: contain;
@@ -33,12 +33,20 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
     <script src="/js/gShake.js"></script>
-    <script src="/js/audioPlayer.js"></script>
     <script>
-      let isClose = false
+      let isClose = true
+
+      const alofomora = () => {
+        $.ajax({
+          url: `/api/${isClose ? "open" : "close"}?uuid=${location.pathname.slice(2)}`,
+          type: "POST"
+        })
+        .fail(location.reload)
+      }
+
       $(this).gShake(() => {
-        $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
         isClose = !isClose
+        $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
       })
     </script>
 </body>
