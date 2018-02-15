@@ -10,6 +10,7 @@ func GetRouter() *gin.Engine {
 	r.Static("/js", "./public/js")
 	r.Static("/image", "./public/image")
 	r.Static("/css", "./public/css")
+	r.Static("/media", "./public/media")
 
 	r.LoadHTMLGlob("view/*")
 
