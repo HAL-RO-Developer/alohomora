@@ -38,7 +38,8 @@ func App(c *gin.Context) {
 
 func Open(c *gin.Context) {
 	uid := c.Query("uuid")
-	if NowUUid == uid {
+	fmt.Println(uid, NowUUid)
+	if NowUUid != uid {
 		c.JSON(401, "uuid err")
 		return
 	}
@@ -49,12 +50,12 @@ func Open(c *gin.Context) {
 }
 func Close(c *gin.Context) {
 	uid := c.Query("uuid")
-	if NowUUid == uid {
+	if NowUUid != uid {
 		c.JSON(401, "uuid err")
 		return
 	}
 	go websocket.SendAll("close!")
-	API("1")
+	API("0")
 	c.JSON(200, "ok")
 }
 
