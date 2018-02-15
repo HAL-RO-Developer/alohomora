@@ -53,8 +53,11 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+  <script src="/js/audioPlayer.js"></script>
   <script>
     (($) => {
+
+      const ap = new AudioPlayer
 
       const getToken = () => {
         const token = localStorage.getItem("alohomora-token")
@@ -62,14 +65,21 @@
       }
 
       const fetch = () => {
+        const token = getToken()
         $.ajax({
-          url: `/api/uuid?token=${getToken()}`,
+          url: "/api/uuid?token=" + token,
           type: "POST"
         })
         .then((res) => {
           const qr = new QRCode("qrcode")
           qr.makeCode(`${location.origin}/@${res.uuid}`)
           console.log(`${location.origin}/@${res.uuid}`)
+          const ws = new WebSocket("ws://" + location.host + "/ws")
+          ws.onmessage = (e) => {
+            if(e.data) {
+              ap.play("/media/Alohomora.mp3")
+            }
+          }
         })
       }
       fetch()

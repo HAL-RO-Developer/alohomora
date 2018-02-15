@@ -48,8 +48,8 @@
           type: "POST"
         })
         .then(() => {
-          isClose = !isClose
           $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
+          isClose = !isClose
         })
       }
 
