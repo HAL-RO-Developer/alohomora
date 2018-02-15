@@ -69,6 +69,7 @@
         .then((res) => {
           const qr = new QRCode("qrcode")
           qr.makeCode(`${location.origin}/@${res.uuid}`)
+          console.log(`${location.origin}/@${res.uuid}`)
         })
       }
       fetch()

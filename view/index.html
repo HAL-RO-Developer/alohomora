@@ -5,7 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>alofomora</title>
+  <style>
+    body, html {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(23, 37, 44);
+    }
+     * {
+       padding: 0;
+       margin: 0;
+       box-sizing: border-box;
+     }
+     .wrapper {
+       width: 100vw;
+       height: 85vh;
+       background-image: url("/image/true.png");
+       background-repeat: no-repeat;
+       background-position: center center;
+       background-size: contain;
+     }
+  </style>
 </head>
 <body>
+    <div class="wrapper"></div>
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="/js/gShake.js"></script>
+    <script>
+      let isClose = false
+      $(this).gShake(() => {
+        $(".wrapper").css("background-image", `url('/image/${isClose}.png')`)
+        isClose = !isClose
+      })
+    </script>
 </body>
 </html>
