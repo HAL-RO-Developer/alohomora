@@ -6,7 +6,7 @@ import (
 	"github.com/trevex/golem"
 )
 
-var conns []golem.Connection
+var conn *golem.Connection
 
 type joinModel struct {
 	ID int `json:"id"`
@@ -24,14 +24,13 @@ func createRouter() *golem.Router {
 }
 
 // connection接続時の処理はここに書く
-func connectHndle(conn *golem.Connection, http *http.Request) {
-	conns = append(conns, *conn)
+func connectHndle(c *golem.Connection, http *http.Request) {
+	conn = c
 }
 
 func SendAll(msg string) {
-	for _, conn := range conns {
-		conn.Emit("alohomora", struct {
-			Msg string `json:"msg"`
-		}{Msg: msg})
-	}
+	conn.Emit("alohomora", struct {
+		Msg string `json:"msg"`
+	}{Msg: msg})
+
 }
