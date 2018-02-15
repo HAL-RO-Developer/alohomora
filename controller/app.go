@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/HAL-RO-Developer/alohomora/websocket"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 )
@@ -20,6 +21,7 @@ func SetToken(c *gin.Context) {
 		return
 	}
 	NowUUid = uuid.NewV4().String()
+	fmt.Println(NowUUid)
 	c.JSON(200, gin.H{
 		"uuid": NowUUid,
 	})
@@ -40,6 +42,8 @@ func Open(c *gin.Context) {
 		c.JSON(401, "uuid err")
 		return
 	}
+	go websocket.SendAll("open!")
+
 	API("1")
 }
 func Close(c *gin.Context) {
@@ -48,6 +52,7 @@ func Close(c *gin.Context) {
 		c.JSON(401, "uuid err")
 		return
 	}
+	go websocket.SendAll("close!")
 	API("1")
 }
 
