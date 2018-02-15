@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/HAL-RO-Developer/alohomora/controller"
+	"github.com/HAL-RO-Developer/alohomora/websocket"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +19,9 @@ func GetRouter() *gin.Engine {
 
 	r.GET("/admin", func(c *gin.Context) {
 		c.HTML(200, "admin.html", nil)
+	})
+	r.GET("/ws", func(c *gin.Context) {
+		websocket.GetHandle()(c.Writer, c.Request)
 	})
 	api := r.Group("/api")
 	apiRouter(api)

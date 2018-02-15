@@ -6,8 +6,6 @@ import (
 )
 
 func apiRouter(api *gin.RouterGroup) {
-	api.POST("/user", controller.CreateUser)
-	api.POST("/login", controller.Login)
 	api.POST("/uuid", controller.SetToken)
 	api.POST("/open", controller.Open)
 	api.POST("/close", controller.Close)
