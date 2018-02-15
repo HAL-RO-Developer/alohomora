@@ -14,4 +14,5 @@ func apiRouter(api *gin.RouterGroup) {
 
 	api.POST("/user", controller.CreateUser)
 	api.POST("/login", controller.Login)
+	api.POST("/uuid", controller.SetToken)
 }
