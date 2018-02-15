@@ -4,9 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>admin</title>
+  <title>alohomora | Admin</title>
+  <style>
+    body, html {
+      width: 100%;
+      height: 100%;
+      display: #fafafa;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .wrapper {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .img {
+      width: 15%;
+    }
+    .img img {
+      display: block;
+      width: 100%;
+    }
+    #qrcode {
+      width: 20%;
+      margin: 50px auto;
+    }
+    #qrcode img {
+      display: block;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <h1>admin</h1>
+
+  <div class="wrapper">
+    <div class="img">
+      <img src="https://fontmeme.com/permalink/180215/04428c4f419e9195b299dcc6757d24f9.png" alt="logo">
+    </div>
+    <div id="qrcode"></div>
+  </div>
+
+  <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+  <script>
+    (($) => {
+
+      const getToken = () => {
+        const token = localStorage.getItem("alohomora-token")
+        return token
+      }
+
+      const fetch = () => {
+        $.ajax({
+          url: `/api/uuid?token=${getToken()}`,
+          type: "POST"
+        })
+        .then((res) => {
+          const qr = new QRCode("qrcode")
+          qr.makeCode(`${location.origin}/@${res.uuid}`)
+        })
+      }
+      fetch()
+
+      window.setToken = (value) => {
+        if(!value) {
+          console.error("tokenいれてね")
+          return
+        }
+        localStorage.setItem("alohomora-token", value)
+        fetch()
+      }
+
+    })(jQuery)
+  </script>
 </body>
 </html>
